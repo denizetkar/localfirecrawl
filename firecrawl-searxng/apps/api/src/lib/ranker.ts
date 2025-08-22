@@ -6,6 +6,7 @@ configDotenv();
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
+  baseURL: process.env.OPENAI_ENDPOINT || "https://api.openai.com/v1",
 });
 
 async function getEmbedding(text: string) {
