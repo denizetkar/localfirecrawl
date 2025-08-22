@@ -65,6 +65,7 @@ services:
       USE_DB_AUTHENTICATION: ${USE_DB_AUTHENTICATION}
       PORT: ${PORT}
       OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_ENDPOINT: ${OPENAI_ENDPOINT}
       HOST: ${HOST}
       SEARCH_BACKEND: ${SEARCH_BACKEND}
       FLY_PROCESS_GROUP: app
@@ -74,7 +75,7 @@ services:
       - searxng
     ports:
       - "${PORT}:${PORT}"
-    command: [ "pnpm", "run", "start:production" ]
+    command: ["pnpm", "run", "start:production"]
 
   worker:
     <<: *common-service
@@ -87,6 +88,7 @@ services:
       SEARXNG_CATEGORIES: ${SEARXNG_CATEGORIES}
       USE_DB_AUTHENTICATION: ${USE_DB_AUTHENTICATION}
       OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_ENDPOINT: ${OPENAI_ENDPOINT}
       PORT: ${PORT}
       HOST: ${HOST}
       SEARCH_BACKEND: ${SEARCH_BACKEND}
@@ -105,7 +107,8 @@ services:
         condition: service_started
       searxng:
         condition: service_started
-    command: [ "node", "--max-old-space-size=4096", "dist/src/services/queue-worker.js" ]
+    command:
+      ["node", "--max-old-space-size=4096", "dist/src/services/queue-worker.js"]
     restart: unless-stopped
 
   valkey:
@@ -158,4 +161,4 @@ volumes:
   firecrawl-valkey:
   valkey-data2:
   caddy-data:
-  caddy-config: 
+  caddy-config:
