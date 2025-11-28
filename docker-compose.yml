@@ -1,5 +1,3 @@
-version: "3.7"
-
 x-common-service: &common-service
   build: ./firecrawl-searxng/apps/api
   ulimits:
